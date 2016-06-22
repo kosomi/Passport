@@ -49,6 +49,13 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+app.use(flash());
+app.use(function (req, res, next) {
+  res.locals.messages = req.flash('error');
+  next();
+});
+
 app.use(expressValidator({
   errorFormatter: function (param, msg, value) {
     var namespace = param.split('.'),
